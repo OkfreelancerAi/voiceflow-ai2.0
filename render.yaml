@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: voiceflow-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app_stripe:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: PORT
+        value: 10000
